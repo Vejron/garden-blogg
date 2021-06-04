@@ -21,13 +21,22 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    { src: '~/plugins/composition-api'},
+    { src: '~/plugins/rich-text-renderer'},
+    { src: '~/plugins/prism'},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  components: [
+    '~/components/atoms',
+    '~/components/molecules',
+    '~/components/templates',
+  ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+    // https://image.nuxtjs.org
+    '@nuxt/image',
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/tailwindcss
@@ -40,7 +49,28 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    [
+      'storyblok-nuxt',
+      {
+        accessToken: 'fxVEhdfO39QgipD1iLg7ogtt',
+        cacheProvider: 'memory'
+      }
+    ],
   ],
+
+  image: {
+    domains: ['https://a.storyblok.com'],
+    // The screen sizes predefined by `@nuxt/image`:
+    screens: {
+      xs: 320,
+      sm: 640,
+      md: 768,
+      lg: 1024,
+      xl: 1280,
+      xxl: 1536,
+      '2xl': 1536
+    },
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},

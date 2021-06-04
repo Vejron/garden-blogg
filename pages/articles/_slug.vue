@@ -1,14 +1,11 @@
 <template>
-  <div class="py-20 flex overflow-hidden">
-    <component
-      v-if="story.content.component"
-      :key="story.content._uid"
-      :blok="story.content"
-      :is="story.content.component" />
-  </div>
+  <section>
+    <Article :blok="story.content"/>
+  </section>
 </template>
  
 <script>
+
 export default {
   data () {
     return {
@@ -16,6 +13,9 @@ export default {
     }
   },
   mounted () {
+    // code highlights
+    //Prism.highlightAll();
+    // live preview and updates
     this.$storybridge(() => {
       const storyblokInstance = new StoryblokBridge()
  
@@ -37,25 +37,14 @@ export default {
       })
     })
   },
-  async fetch(context) {
-    // Loading reference data - Articles in our case
-    if(context.store.state.articles.loaded !== '1') {
- 
-      let articlesRefRes = await context.app.$storyapi.get(`cdn/stories/`, { starts_with: 'articles/', version: 'draft' })
-      context.store.commit('articles/setArticles', articlesRefRes.data.stories)
-      context.store.commit('articles/setLoaded', '1')
-    }
-  },
   asyncData (context) {
-    // // This what would we do in real project
-    // const version = context.query._storyblok || context.isDev ? 'draft' : 'published'
-    // const fullSlug = (context.route.path == '/' || context.route.path == '') ? 'home' : context.route.path
+    // Load the JSON from the API
+    let version = context.query._storyblok || context.isDev ? 'draft' : 'published'
  
-    // Load the JSON from the API - loadig the home content (index page)
-    return context.app.$storyapi.get('cdn/stories/home', {
-      version: 'draft'
+    return context.app.$storyapi.get(`cdn/stories/articles/${context.params.slug}`, {
+      version: version
     }).then((res) => {
-      return res.data
+      return res.data;
     }).catch((res) => {
       if (!res.response) {
         console.error(res)

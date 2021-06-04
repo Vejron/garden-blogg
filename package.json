@@ -9,12 +9,22 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@highlightjs/vue-plugin": "^1.0.2",
+    "@marvr/storyblok-rich-text-types": "^2.0.1",
+    "@marvr/storyblok-rich-text-vue-renderer": "^2.0.1",
     "@nuxtjs/axios": "^5.13.1",
     "@nuxtjs/pwa": "^3.3.5",
+    "@tailwindcss/typography": "^0.4.1",
+    "@vue/composition-api": "^1.0.0-rc.9",
+    "clipboard": "^2.0.8",
     "core-js": "^3.9.1",
-    "nuxt": "^2.15.3"
+    "highlight.js": "^11.0.0",
+    "nuxt": "^2.15.3",
+    "prismjs": "^1.23.0",
+    "storyblok-nuxt": "^2.0.1"
   },
   "devDependencies": {
+    "@nuxt/image": "^0.4.14",
     "@nuxt/types": "^2.15.3",
     "@nuxt/typescript-build": "^2.1.0",
     "@nuxtjs/tailwindcss": "^4.1.2",
